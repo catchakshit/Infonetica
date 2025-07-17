@@ -1,0 +1,52 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userprefs
+
+# Visual Studio cache/options folders
+.vs/
+
+# Rider project files
+.idea/
+
+# ReSharper files
+_ReSharper*/
+*.DotSettings.user
+
+# DotNet temporary files
+*.pidb
+*.svclog
+*.log
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# Publish output folder
+publish/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Backup files
+*.bak
+*.old
+*.orig
+*.tmp
+
+# Logs
+*.log
+
+# JetBrains Rider
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.json
