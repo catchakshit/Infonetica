@@ -13,14 +13,14 @@ A minimal workflow engine API using ASP.NET Core. Define workflows, start instan
 
 ### Running the Application
 
-```bash
-git clone <repository-url>
-cd <repository-folder>
+bash
+git clone https://github.com/catchakshit/Infonetica
+cd Infonetica
 dotnet build
 dotnet run
-```
 
-The API runs by default at `http://localhost:5000`.
+
+The API runs by default at http://localhost:5000.
 
 ---
 
@@ -28,13 +28,13 @@ The API runs by default at `http://localhost:5000`.
 
 ### 1. Create Workflow
 
-**POST** `/workflows`
+*POST* /workflows
 
 Create a new workflow definition.
 
-**Request body example:**
+*Request body example:*
 
-```json
+json
 {
 	"id": "workflow1",
 	"states": [
@@ -57,126 +57,126 @@ Create a new workflow definition.
 		}
 	]
 }
-```
 
-**Responses:**
 
-- `200 OK` – Workflow created.
-- `400 Bad Request` – Invalid workflow (duplicate ID, no initial state, invalid action states).
+*Responses:*
+
+- 200 OK – Workflow created.
+- 400 Bad Request – Invalid workflow (duplicate ID, no initial state, invalid action states).
 
 ---
 
 ### 2. Get All Workflow Definition
 
-**GET** `/workflows`
+*GET* /workflows
 
 Get All workflows.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Workflow definition JSON.
-- `404 Not Found` – Not found.
+- 200 OK – Workflow definition JSON.
+- 404 Not Found – Not found.
 
 ---
 
 ### 3. Get Workflow Definition
 
-**GET** `/workflows/{id}`
+*GET* /workflows/{id}
 
 Get workflow by ID.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Workflow definition JSON.
-- `404 Not Found` – Not found.
+- 200 OK – Workflow definition JSON.
+- 404 Not Found – Not found.
 
 ---
 
 ### 4. Start Workflow Instance
 
-**POST** `/workflows/{id}/instances`
+*POST* /workflows/{id}/instances
 
 Start new instance of workflow.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Returns instance with new ID and initial state.
-- `400 Bad Request` – Workflow not found or no enabled initial state.
+- 200 OK – Returns instance with new ID and initial state.
+- 400 Bad Request – Workflow not found or no enabled initial state.
 
 ---
 
 ### 5. Get All Workflow Instance
 
-**GET** `/instances`
+*GET* /instances
 
 Get all instances.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Instance details (current state and history).
-- `404 Not Found` – Not found.
+- 200 OK – Instance details (current state and history).
+- 404 Not Found – Not found.
 
 ---
 
 ### 6. Get Workflow Instance
 
-**GET** `/instances/{id}`
+*GET* /instances/{id}
 
 Get instance by ID.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Instance details (current state and history).
-- `404 Not Found` – Not found.
+- 200 OK – Instance details (current state and history).
+- 404 Not Found – Not found.
 
 ---
 
 ### 7. Execute Action on Instance
 
-**POST** `/instances/{id}/actions/{actionId}`
+*POST* /instances/{id}/actions/{actionId}
 
 Execute an action on instance to move state.
 
-**Responses:**
+*Responses:*
 
-- `200 OK` – Action executed successfully.
-- `400 Bad Request` – Invalid instance or action, disabled action, invalid from-state, or already in final state.
+- 200 OK – Action executed successfully.
+- 400 Bad Request – Invalid instance or action, disabled action, invalid from-state, or already in final state.
 
 ---
 
 ## Data Model Highlights
 
-- **State:**
+- *State:*
 
-  - `id` (string)
-  - `isInitial` (bool)
-  - `isFinal` (bool)
-  - `enabled` (bool)
+  - id (string)
+  - isInitial (bool)
+  - isFinal (bool)
+  - enabled (bool)
 
-- **Action:**
+- *Action:*
 
-  - `id` (string)
-  - `enabled` (bool)
-  - `fromStates` (list of state IDs)
-  - `toState` (state ID)
+  - id (string)
+  - enabled (bool)
+  - fromStates (list of state IDs)
+  - toState (state ID)
 
-- **WorkflowDefinition:**
+- *WorkflowDefinition:*
 
-  - `id` (string)
-  - `states` (list of State)
-  - `actions` (list of Action)
+  - id (string)
+  - states (list of State)
+  - actions (list of Action)
 
-- **WorkflowInstance:**
-  - `id` (string, GUID)
-  - `definitionId` (string)
-  - `currentStateId` (string)
-  - `history` (list of action IDs)
+- *WorkflowInstance:*
+  - id (string, GUID)
+  - definitionId (string)
+  - currentStateId (string)
+  - history (list of action IDs)
 
 ---
 
 ## Persistence
 
-Workflow instances persist in `history.json` file. Definitions and instances are in-memory.
-Workflows persist in `workflows.json` file. Definitions and instances are in-memory.
+Workflow instances persist in history.json file. Definitions and instances are in-memory.
+Workflows persist in workflows.json file. Definitions and instances are in-memory.
 
 ---
